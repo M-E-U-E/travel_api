@@ -1,0 +1,254 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User and Destination Management API",
+    "version": "1.0.0",
+    "description": "API for managing users and travel destinations, including registration, login, and destination services."
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/register": {
+      "post": {
+        "summary": "Register a new user",
+        "tags": ["User Service"],
+        "requestBody": {
+          "description": "User registration data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "password", "email"],
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" },
+                  "email": { "type": "string" },
+                  "role": {
+                    "type": "string",
+                    "enum": ["user", "admin"],
+                    "default": "user"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "username": { "type": "string" },
+                        "email": { "type": "string" },
+                        "role": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Authenticate a user",
+        "tags": ["User Service"],
+        "requestBody": {
+          "description": "User login credentials",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "password"],
+                "properties": {
+                  "username": { 
+                    "type": "string",
+                    "example": "admin"
+                  },
+                  "password": { 
+                    "type": "string",
+                    "example": "admin123"
+                  }
+                }
+              },
+              "example": {
+                "username": "admin",
+                "password": "admin123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": { "type": "string" },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "username": { "type": "string" },
+                        "email": { "type": "string" },
+                        "role": { "type": "string" }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "token": "eyJhbGciOiJIUzI1NiIs...",
+                  "user": {
+                    "id": "1",
+                    "username": "admin",
+                    "email": "admin@example.com",
+                    "role": "admin"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                },
+                "example": {
+                  "error": "Invalid credentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "summary": "Get user profile with role-based access",
+        "description": "Retrieves user profile information. Admin users get access to all user profiles, while regular users only see their own profile.",
+        "tags": ["User Service"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "User's unique identifier"
+                    },
+                    "username": {
+                      "type": "string",
+                      "description": "User's username"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "User's email address"
+                    },
+                    "role": {
+                      "type": "string",
+                      "enum": ["Admin", "User"],
+                      "description": "User's role in the system"
+                    },
+                    "users": {
+                      "type": "array",
+                      "description": "List of all users (only included for Admin role)",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "User's unique identifier"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "User's full name"
+                          },
+                          "email": {
+                            "type": "string",
+                            "description": "User's email address"
+                          },
+                          "role": {
+                            "type": "string",
+                            "enum": ["Admin", "User"],
+                            "description": "User's role in the system"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": ["id", "username", "email", "role"]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Insufficient permissions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
