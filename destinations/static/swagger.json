@@ -1,0 +1,71 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Destinations API",
+    "version": "1.0.0",
+    "description": "API for managing travel destinations."
+  },
+  "paths": {
+    "/destinations": {
+      "get": {
+        "summary": "Get all destinations",
+        "tags": ["Destinations"],
+        "responses": {
+          "200": {
+            "description": "List of destinations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "name": { "type": "string" },
+                      "description": { "type": "string" },
+                      "location": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/destinations/{destination_id}": {
+      "delete": {
+        "summary": "Delete a destination by ID",
+        "tags": ["Destinations"],
+        "parameters": [
+          {
+            "name": "destination_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Authorization token (admin only)"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Destination deleted"
+          },
+          "401": {
+            "description": "Authorization token required"
+          },
+          "403": {
+            "description": "Unauthorized: Only admins can delete destinations"
+          }
+        }
+      }
+    }
+  }
+}
