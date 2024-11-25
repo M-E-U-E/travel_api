@@ -1,11 +1,12 @@
 # Assignment05
 # Travel API
 
- A Backend API.
+The Travel API is a microservices-based system that manages user authentication, travel destinations, and authorization using three interconnected services (Users, Destinations, and Authentication) to provide secure access to travel-related data and operations.
 
 ## Table of Contents
 - [Description](#description)
 - [Git Clone Instructions](#git-clone-instructions)
+- [How to Run](#how-to-run)
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Technologies Used](#technologies-used)
@@ -76,8 +77,56 @@ To clone this project to your local machine, follow these steps:
     3. Authentication Service: http://localhost:5003/swagger
     
     
-    #### Now open POSTMAN to check API Endpoints
-   
+# How to Run:
+1. ## Users:
+   Register: 
+   ```
+   {
+    "username": "admin_jane",
+    "password": "AdminPass123",
+    "email": "jane.admin@example.com",
+    "role": "admin"
+   }
+   ```
+  Login:
+  ```
+  {
+  "username": "admin_jane",
+  "password": "AdminPass123"
+  }
+  ```
+  Then generated token can be use.
+  For Get/Profile:
+  Use this for Get Profile:
+  ```
+  {
+    "username": "admin",
+    "password": "admin123"
+  }
+  ```
+  Then use the generated token, Click "Authorize" at the top and enter your token without the Bearer prefix.
+  Only use the token then clicked "Authorize" and "Close" 
+  Then you can directly click "Execute" on the /profile endpoint.
+ 2. ## Authentication:
+  Use the generated token, Click "Authorize" at the top and enter your token with the "Bearer" prefix.
+  ```
+  Bearer eyfhysrfyurf...
+  ```
+  Like this way then clicked "Authorize" and "Close" 
+  then you can check Authorization and Validity
+ 3. ## Destinations
+    Here any one can check all hotel but only admin can delete destinations by its ID
+    here can be use the generated tokhn of this:
+    
+   Here you can use any admin token to delete any destination,
+    for this you have to follow the previous method.
+    Use the generated token, Click "Authorize" at the top and enter your token with the "Bearer" prefix.
+     ```
+     Bearer eyfhysrfyurf...
+     ```
+    Like this way then clicked "Authorize" and "Close" 
+    then you can delete a destination by its ID.
+    
 ## Features
 
     - Users Service (Port 5001): Handles user registration, login, and profile management
