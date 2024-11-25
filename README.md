@@ -78,6 +78,12 @@ To clone this project to your local machine, follow these steps:
     
     
 # How to Run:
+   Here are the command to run every micro services, make sure that all three are running in separate terminal.
+   ```
+      python users/app.py or python -m users.app
+      python authentication/app.py or python -m authentication.app
+      python destinations/app.py or python -m destinations.app
+   ```
  1. ## Users:
       Register: 
       ```
