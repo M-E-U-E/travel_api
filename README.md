@@ -77,8 +77,8 @@ To clone this project to your local machine, follow these steps:
     3. Authentication Service: http://localhost:5003/swagger
     
     
-   # How to Run:
-   1. ## Users:
+# How to Run:
+ 1. ## Users:
       Register: 
       ```
       {
@@ -107,18 +107,17 @@ To clone this project to your local machine, follow these steps:
      Then use the generated token, Click "Authorize" at the top and enter your token without the Bearer prefix.
      Only use the token then clicked "Authorize" and "Close" 
      Then you can directly click "Execute" on the /profile endpoint.
-    2. ## Authentication:
-     Use the generated token, Click "Authorize" at the top and enter your token with the "Bearer" prefix.
+   2. ## Authentication:
+      Use the generated token, Click "Authorize" at the top and enter your token with the "Bearer" prefix.
      ```
      Bearer eyfhysrfyurf...
      ```
-     Like this way then clicked "Authorize" and "Close" 
-     then you can check Authorization and Validity
-    3. ## Destinations
+      Like this way then clicked "Authorize" and "Close" 
+      then you can check Authorization and Validity
+   3. ## Destinations
        Here any one can check all hotel but only admin can delete destinations by its ID
-       here can be use the generated tokhn of this:
-       
-      Here you can use any admin token to delete any destination,
+       here can be use the generated tokhn of this:  
+       Here you can use any admin token to delete any destination,
        for this you have to follow the previous method.
        Use the generated token, Click "Authorize" at the top and enter your token with the "Bearer" prefix.
         ```
