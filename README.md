@@ -9,6 +9,7 @@
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Technologies Used](#technologies-used)
+- [Validations](#validations)
 - [Schema](#schema)
 - [Dependencies](#dependencies)
 
@@ -84,13 +85,46 @@ To clone this project to your local machine, follow these steps:
     - Authentication Service (Port 5003): Handles token validation and authorization
     
 ### Endpoint Operations & Testing Guide
-
-
-
+ 1. Users Service (Port 5001)
+    ```
+      User {
+         id: string
+         username: string
+         password: string (hashed)
+         email: string
+         role: string (admin/user)
+     }
+    ```
+     - Endpoints:
+     POST /register
+     POST /login
+     GET /profile
+ 2. Destinations Service (Port 5002)
+     ```
+      Destination {
+          id: integer
+          name: string
+          description: string
+          location: string
+      }
+     ```
+     - Endpoints:
+     GET /destinations
+     DELETE /destinations/{id} (admin only)
+  3. Authentication Service (Port 5003)
+    ```
+     Token {
+         username: string
+         role: string
+         exp: datetime
+     }
+    ```
+     - Endpoints:
+      POST /validate
+      POST /authorize
 
 
 ## Project Structure
-
 ```
 TRAVEL_API/
 │
@@ -127,23 +161,63 @@ TRAVEL_API/
 ├── app.py
 ├── README.md
 └── requirements.txt
-
-
 ```
-
 ## Technologies Used
 
-- **Node.js: Runtime environment for server-side application execution
-- **Express.js: Web application framework for handling routes and HTTP requests
-- **TypeScript: Programming language for type safety and enhanced developmentNext.js: React framework for server-side rendering and static site generation
+- **Backend Framework: Flask (Python web framework)
+- **Authentication: JWT (JSON Web Tokens) with PyJWT library
+- **API Documentation: Swagger/OpenAPI with flask-swagger-ui
 - **Jest: Testing framework for unit and integration tests
-- **Supertest: HTTP endpoint testing library
-- **File System (fs): Node.js module for file operations
-- **React.js: Frontend library for building interactive user interfaces
-- **Next.js: React framework for server-side rendering and static site generation
+- **Security: Werkzeug for password hashing, CORS handling with flask-cors
+- **Database: In-memory Python dictionaries (can be extended to SQLite/PostgreSQL)
+- **Architecture: Microservices (3 services: Users, Destinations, Authentication)
   
-    
-## Database Schema (In-Memory):
+## Validations  
+  valid:
+  
+    register:
+    {
+        "username": "admin_jane",
+        "password": "AdminPass123",
+        "email": "jane.admin@example.com",
+        "role": "admin"
+    }
+    login:
+    {
+      "username": "admin_jane",
+      "password": "AdminPass123"
+    }
+   # Use this for Register and login
+   
+  invalid:
+  
+       // Invalid username (special characters)
+       {
+           "username": "john@doe",
+           "password": "Password123"
+       }
+       // Invalid password (no uppercase)
+       {
+           "username": "john_doe",
+           "password": "password123"
+       }
+       // Invalid email format
+       {
+           "username": "john_doe",
+           "password": "Password123",
+           "email": "not-an-email"
+       }
+       // Invalid role
+       {
+           "username": "john_doe",
+           "password": "Password123",
+           "email": "john@example.com",
+           "role": "superuser"
+       }
+
+
+## Schema
+  Database Schema (In-Memory):
   ```bash
   Users Table:
   +----------+-----------+----------+-------+
@@ -159,11 +233,21 @@ TRAVEL_API/
   | int| string | string      | string   |
   +----+--------+-------------+----------+
   ```
+  # Authorization Rules:
+   ```
+      Role Permissions:
+    ├── Admin
+    │   ├── View all destinations
+    │   ├── Delete destinations
+    │   └── Access all profiles
+    └── User
+        ├── View destinations
+        └── Access own profile
+   ```
+ ## Dependencies
 
-## Dependencies
-
-### Remember:
+ ### Remember:
      -Keep all three services running
      -Use the token within 24 hours
-     -Always include "Bearer " before the token
+     -Always include "Bearer " before the token only exception for Get/profile
      -Check terminal outputs for error messages
