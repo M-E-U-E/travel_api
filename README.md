@@ -58,9 +58,9 @@ To clone this project to your local machine, follow these steps:
     pip install werkzeug
     pip install requests
     ```
-5. **Start the Services
+4. **Start the Services
     Open three separate terminals (make sure virtual environment is activated in each):
-    Run the backend api:
+    Run the backend api:**
     ```bash
     # Terminal 1 - Users Service (Port 5001)
     python users/app.py
@@ -72,7 +72,7 @@ To clone this project to your local machine, follow these steps:
     python authentication/app.py
     ```
     
-    ### Access Swagger UIs:
+    ### **Access Swagger UIs:**
     1. Users Service: http://localhost:5001/swagger
     2. Destinations Service: http://localhost:5002/swagger
     3. Authentication Service: http://localhost:5003/swagger
