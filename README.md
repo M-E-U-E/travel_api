@@ -144,7 +144,38 @@ To clone this project to your local machine, follow these steps:
        - Users Service (Port 5001): Handles user registration, login, and profile management
        - Destinations Service (Port 5002): Manages travel destinations
        - Authentication Service (Port 5003): Handles token validation and authorization
-    
+
+   #Test
+   
+      # Step 1: Install necessary dependencies (if not already installed)
+      pip install Flask coverage werkzeug requests pytest
+      
+      # Step 2: Run the tests using unittest (with coverage)
+      # This will discover and run all the tests in the 'tests' directory
+      python -m unittest discover tests  # This runs the tests in the 'tests' folder
+      
+      # Step 3: Alternatively, run the tests directly with coverage for more detailed reports
+      # This will execute the tests in the specified test file and track code coverage
+      python test_users_api.py  # Ensure the script with tests is named 'test_users_api.py'
+      
+      # Step 4: View the coverage summary after running the tests
+      # This will print out a coverage report and generate an HTML report if configured in the test file
+      # Make sure you have COV.report() and COV.html_report() in your code
+      
+      # Step 5: If you prefer using pytest for better test output and features, install pytest
+      pip install pytest  # Install pytest
+      
+      # Step 6: Run the tests using pytest for more detailed output and reporting
+      pytest tests/  # This runs all tests in the 'tests' directory with pytest
+      
+      # Step 7: If you want to run a specific test file or test method with pytest
+      # You can run it like this:
+      pytest tests/test_users_api.py  # Run a specific test file
+      pytest -k 'test_register_success'  # Run a specific test method by name
+      
+      # Step 8: View the pytest test output for success or failure details
+      # It will provide detailed logs and will indicate which tests failed or passed.
+
    ### Endpoint Operations & Testing Guide
     1. Users Service (Port 5001)
        ```
@@ -235,20 +266,21 @@ TRAVEL_API/
   
 ## Validations  
   valid:
-  
-    register:
-    {
-        "username": "admin_jane",
-        "password": "AdminPass123",
-        "email": "jane.admin@example.com",
-        "role": "admin"
-    }
-    login:
-    {
-      "username": "admin_jane",
-      "password": "AdminPass123"
-    }
-   # Use this for Register and login
+**Use this for Register and login**
+   ```
+       register:
+       {
+           "username": "admin_jane",
+           "password": "AdminPass123",
+           "email": "jane.admin@example.com",
+           "role": "admin"
+       }
+       login:
+       {
+         "username": "admin_jane",
+         "password": "AdminPass123"
+       }
+   ```
    
   invalid:
   
