@@ -33,7 +33,8 @@ To clone this project to your local machine, follow these steps:
     ```bash
     cd travel_api
     ```
-3. **Set Up Virtual Environment
+3. **Set Up Virtual Environment**
+   
     ```bash
     # Create virtual environment
     python -m venv venv
@@ -57,7 +58,7 @@ To clone this project to your local machine, follow these steps:
     pip install werkzeug
     pip install requests
     ```
-4. **Start the Services
+5. **Start the Services
     Open three separate terminals (make sure virtual environment is activated in each):
     Run the backend api:
     ```bash
