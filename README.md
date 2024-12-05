@@ -174,7 +174,14 @@ To clone this project to your local machine, follow these steps:
       pytest -k 'test_register_success'  # Run a specific test method by name
       
       # Step 8: View the pytest test output for success or failure details
-      # It will provide detailed logs and will indicate which tests failed or passed.
+      # It will provide detailed logs indicating which tests failed or passed.
+      
+pip install coverage
+python -m coverage run -m unittest discover -s tests
+python -m coverage html
+start htmlcov/index.html
+
+```coverage run -m unittest discover -s tests```
 
    ### Endpoint Operations & Testing Guide
     1. Users Service (Port 5001)
