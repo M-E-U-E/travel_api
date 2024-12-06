@@ -15,7 +15,7 @@ The Travel API is a microservices-based system that manages user authentication,
 - [Dependencies](#dependencies)
 
 
-## Description
+## Descriptionxdg-open htmlcov/index.html
 
 Develop a Travel API using Flask with a microservices architecture. Each microservice handles specific functions: Destinations (managing travel destinations), Users (registration and profile management), and Authentication (token-based authentication with role-based access). The API follows OpenAPI/Swagger standards and uses Python's built-in data structures.
 
@@ -145,7 +145,7 @@ To clone this project to your local machine, follow these steps:
        - Destinations Service (Port 5002): Manages travel destinations
        - Authentication Service (Port 5003): Handles token validation and authorization
 
-   #Test
+   # Test
    
       # Step 1: Install necessary dependencies (if not already installed)
       pip install Flask coverage werkzeug requests pytest
@@ -175,11 +175,11 @@ To clone this project to your local machine, follow these steps:
       
       # Step 8: View the pytest test output for success or failure details
       # It will provide detailed logs indicating which tests failed or passed.
-      
-pip install coverage
-python -m coverage run -m unittest discover -s tests
-python -m coverage html
-start htmlcov/index.html
+## Main     
+      pip install coverage
+      python -m coverage run -m unittest discover -s tests
+      python -m coverage html
+      start htmlcov/index.html or xdg-open htmlcov/index.html
 
 ```coverage run -m unittest discover -s tests```
 
