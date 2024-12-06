@@ -175,7 +175,8 @@ To clone this project to your local machine, follow these steps:
       
       # Step 8: View the pytest test output for success or failure details
       # It will provide detailed logs indicating which tests failed or passed.
-## Main     
+## Main Testing Command:
+
       pip install coverage
       python -m coverage run -m unittest discover -s tests
       python -m coverage html
